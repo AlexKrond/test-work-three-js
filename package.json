@@ -4,11 +4,16 @@
   "description": "Test work",
   "scripts": {
     "start": "npx serve ./public",
-    "dev": "live-server ./public"
+    "dev": "live-server ./public",
+    "build": "npx webpack"
   },
   "author": "Alex Kashko",
   "license": "ISC",
   "dependencies": {
     "three": "^0.114.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   }
 }
