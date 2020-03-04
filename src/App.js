@@ -4,6 +4,7 @@ import Camera from "./Camera.js";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Cube from "./Cube.js";
 import handleMouseMove from "./handleMouseMove.js";
+import handleClick from "./handleClick.js";
 
 
 class App {
@@ -38,7 +39,18 @@ class App {
     this.INTERSECTED = null;
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
-    handleMouseMove(this.mouse);
+
+    handleMouseMove({
+      mouse: this.mouse,
+      domElement: this.renderer.domElement
+    });
+    handleClick({
+      mouse: this.mouse,
+      raycaster: this.raycaster,
+      scene: this.scene,
+      camera: this.camera,
+      domElement: this.renderer.domElement
+    });
 
     document.querySelector("#game").appendChild(this.renderer.domElement);
   }
@@ -46,7 +58,7 @@ class App {
   render() {
     this.raycaster.setFromCamera(this.mouse, this.camera);
     const intersects = this.raycaster.intersectObjects(this.scene.children, true);
-    if (intersects[0]) console.log(intersects[0]);
+
     if (intersects.length > 0 && intersects[0].object.material.hasOwnProperty('emissive')) {
       if (this.INTERSECTED !== intersects[0].object) {
         if (this.INTERSECTED) this.INTERSECTED.material.emissive.setHex(this.INTERSECTED.currentHex);
