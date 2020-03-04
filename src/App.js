@@ -5,23 +5,40 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Cube from "./Cube.js";
 import handleMouseMove from "./handleMouseMove.js";
 import handleClick from "./handleClick.js";
+import config from "./config.js";
 
 
 class App {
   constructor() {
+    const {cubesNumber, cubeSizeMax, cubeSizeMin, spawnSquareSize} = config;
+
     this.width = document.documentElement.clientWidth;
     this.height = document.documentElement.clientHeight;
 
     this.scene = new THREE.Scene();
 
-    // cube
-    const cube = new Cube(50);
+    // cubes
+    for (let i = 0; i < cubesNumber; i++) {
+      const size = Math.random() * (cubeSizeMax - cubeSizeMin) + cubeSizeMin;
+      const position = new THREE.Vector3(
+          Math.random() * spawnSquareSize - spawnSquareSize / 2,
+          0,
+          Math.random() * spawnSquareSize - spawnSquareSize / 2
+      );
+      const rotation = new THREE.Vector3(
+          Math.random() * (Math.PI / 2),
+          Math.random() * (Math.PI / 2),
+          Math.random() * (Math.PI / 2),
+      );
+
+      const cube = new Cube(size, position, rotation);
+      this.scene.add(cube.mesh);
+    }
 
     const light = new HemisphereLight().light;
     const axesHelper = new THREE.AxesHelper(100);
 
     this.scene.add(
-        cube.mesh,
         light,
         axesHelper
     );
