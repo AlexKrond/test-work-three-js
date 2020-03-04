@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npx serve ./public",
     "dev": "live-server ./public",
-    "build": "npx webpack"
+    "build": "npx webpack --config ./webpack.development.config.js"
   },
   "author": "Alex Kashko",
   "license": "ISC",
