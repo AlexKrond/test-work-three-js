@@ -38,7 +38,8 @@ class App {
     const light = new HemisphereLight().light;
     this.scene.add(light);
 
-    this.camera = new Camera(this.width, this.height).camera;
+    this.camera = new Camera(this.width, this.height, new THREE.Vector3(0, 600, 0)).camera;
+    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
     this.renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true

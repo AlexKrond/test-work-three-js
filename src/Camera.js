@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 class Camera {
-  constructor(width, height, position) {
+  constructor(width, height, position = new THREE.Vector3(0, 0, 0)) {
     const aspectRatio = width / height,
         fieldOfView = 60,
         nearPlane = 1,
@@ -14,8 +14,7 @@ class Camera {
         farPlane
     );
 
-    if (position) this.camera.position.add(position);
-    else this.camera.position.set(0, 100, 300);
+    this.camera.position.add(position);
   }
 }
 
