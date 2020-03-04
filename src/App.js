@@ -6,6 +6,7 @@ import Cube from "./Cube.js";
 import handleMouseMove from "./handleMouseMove.js";
 import handleClick from "./handleClick.js";
 import config from "./config.js";
+import handleResize from "./handleResize.js";
 
 
 class App {
@@ -79,6 +80,13 @@ class App {
       scene: this.scene,
       camera: this.camera,
       domElement: this.renderer.domElement
+    });
+
+
+    // handle resize window
+    handleResize({
+      camera: this.camera,
+      renderer: this.renderer
     });
 
 
