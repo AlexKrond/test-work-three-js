@@ -12,12 +12,16 @@ class App {
   constructor() {
     const {cubesNumber, cubeSizeMax, cubeSizeMin, spawnSquareSize} = config;
 
+    // scene size
     this.width = document.documentElement.clientWidth;
     this.height = document.documentElement.clientHeight;
 
+
+    // scene
     this.scene = new THREE.Scene();
 
-    // cubes
+
+    // spawn cubes
     for (let i = 0; i < cubesNumber; i++) {
       const size = Math.random() * (cubeSizeMax - cubeSizeMin) + cubeSizeMin;
       const position = new THREE.Vector3(
@@ -35,24 +39,36 @@ class App {
       this.scene.add(cube.mesh);
     }
 
+
+    // light
     const light = new HemisphereLight().light;
     this.scene.add(light);
 
+
+    // camera
     this.camera = new Camera(this.width, this.height, new THREE.Vector3(0, 600, 0)).camera;
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+
+    // renderer
     this.renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true
     });
     this.renderer.setSize(this.width, this.height);
 
+
+    // camera orbit controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
 
     // raycaster
     this.INTERSECTED = null;
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
 
+
+    // mouse events handlers
     handleMouseMove({
       mouse: this.mouse,
       domElement: this.renderer.domElement
@@ -65,10 +81,14 @@ class App {
       domElement: this.renderer.domElement
     });
 
+
+    // dom render
     document.querySelector("#game").appendChild(this.renderer.domElement);
   }
 
   render() {
+
+    // change color if intersected
     this.raycaster.setFromCamera(this.mouse, this.camera);
     const intersects = this.raycaster.intersectObjects(this.scene.children, true);
 
@@ -85,6 +105,8 @@ class App {
       this.INTERSECTED = null;
     }
 
+
+    // render
     this.renderer.render(this.scene, this.camera);
   }
 }

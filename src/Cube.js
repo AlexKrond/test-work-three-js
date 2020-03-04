@@ -7,6 +7,8 @@ class Cube {
     const { sphereRadius, sphereName, edgeWidth } = config;
 
     this.mesh = new THREE.Object3D();
+
+    // new BoxGeometry for vertices
     const cubeGeometry = new THREE.BoxGeometry(size, size, size);
 
     const spheres = [];
@@ -14,6 +16,7 @@ class Cube {
     const pairs = [[0, 1], [1, 3], [3, 2], [2, 0], [2, 7], [7, 5], [5, 0], [1, 4], [4, 6], [6, 3], [5, 4], [6, 7]];
 
 
+    // spawn spheres
     for (let i = 0; i < 8; i++) {
       const material = new THREE.MeshPhongMaterial({
         color: Math.random() * 0xffffff,
@@ -31,6 +34,7 @@ class Cube {
     }
 
 
+    // spawn edges
     for (let i = 0; i < 12; i++) {
       const material = new THREE.LineBasicMaterial({
         color: 0x000000,
@@ -48,6 +52,7 @@ class Cube {
     }
 
 
+    // attach edges to spheres
     spheres.forEach((sphere, i) => {
       sphere.edges = [];
 
