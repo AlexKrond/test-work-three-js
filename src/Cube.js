@@ -3,7 +3,7 @@ import config from "./config.js";
 
 
 class Cube {
-  constructor(size = 5, position = new THREE.Vector3(0, 0, 0)) {
+  constructor(size = 5, position = new THREE.Vector3(0, 0, 0), rotation = new THREE.Vector3(0, 0, 0)) {
     const { sphereRadius, sphereName, edgeWidth } = config;
 
     this.mesh = new THREE.Object3D();
@@ -64,6 +64,7 @@ class Cube {
 
 
     this.mesh.position.add(position);
+    this.mesh.rotation.setFromVector3(rotation);
   }
 }
 
