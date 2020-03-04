@@ -1,0 +1,14 @@
+{
+  "name": "test-work-three",
+  "version": "1.0.0",
+  "description": "Test work",
+  "scripts": {
+    "start": "npx serve ./public",
+    "dev": "live-server ./public"
+  },
+  "author": "Alex Kashko",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.114.0"
+  }
+}

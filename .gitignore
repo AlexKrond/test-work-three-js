@@ -1,0 +1,11 @@
+.idea/
+node_modules/
+prototype/
+build/
+coverage/
+
+*.log
+.env
+TODO.md
+
+npm-debug.log*
